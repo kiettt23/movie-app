@@ -1,20 +1,22 @@
 import axios from "axios";
 
-// ➊ Tạo axios instance với cấu hình chung
 const tmdb = axios.create({
-  baseURL: "https://api.themoviedb.org/3", // ➋ API v3 base
+  baseURL: "https://api.themoviedb.org/3",
   headers: {
-    // ➌ Bearer token đọc từ biến môi trường (Vite)
     Authorization: `Bearer ${import.meta.env.VITE_TMDB_READ_TOKEN}`,
     "Content-Type": "application/json;charset=utf-8",
   },
   params: {
-    language: "en-US", // ➍ mặc định ngôn ngữ
+    language: "en-US", // mặc định ngôn ngữ
   },
 });
 
-// ➎ Hàm tiện ích: lấy danh sách "popular" (có phân trang)
+// Lấy danh sách phim phổ biến
 export const getPopularMovies = (page = 1) =>
-  tmdb.get("/movie/popular", { params: { page } }); // ➏ endpoint chính thức
+  tmdb.get("/movie/popular", { params: { page } });
+
+// Tìm kiếm phim
+export const searchMovies = (query, page = 1) =>
+  tmdb.get("/search/movie", { params: { query, page } });
 
 export default tmdb;

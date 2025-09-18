@@ -1,8 +1,27 @@
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import MovieList from "../components/MovieList";
+import { searchMovies } from "../services/tmdb";
+
 const SearchResult = () => {
+  const [movies, setMovies] = useState([]);
+  const query = new URLSearchParams(useLocation().search).get("q"); // Lấy query từ URL
+
+  useEffect(() => {
+    const fetchSearchResults = async () => {
+      if (query) {
+        const response = await searchMovies(query);
+        setMovies(response.data.results);
+      }
+    };
+
+    fetchSearchResults();
+  }, [query]); // Chạy lại khi query thay đổi
+
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold">Search Results</h1>
-      <p>Here are the search results for your query.</p>
+      <h1 className="text-2xl font-bold">Search Results for "{query}"</h1>
+      <MovieList movies={movies} />
     </div>
   );
 };

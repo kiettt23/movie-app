@@ -1,15 +1,23 @@
-import SearchBar from "../components/SearchBar";
+import { useState, useEffect } from "react";
 import MovieList from "../components/MovieList";
+import SearchBar from "../components/SearchBar";
+import { getPopularMovies } from "../services/tmdb";
 
 const Home = () => {
-  const movies = [
-    { title: "Movie 1", description: "Description 1", imageUrl: "url1" },
-    { title: "Movie 2", description: "Description 2", imageUrl: "url2" },
-  ];
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      const response = await getPopularMovies();
+      setMovies(response.data.results);
+    };
+
+    fetchMovies();
+  }, []);
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold">Hello Home</h1>
+      <h1 className="text-2xl font-bold">Popular Movies</h1>
       <SearchBar />
       <MovieList movies={movies} />
     </div>
