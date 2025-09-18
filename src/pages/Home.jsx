@@ -12,6 +12,8 @@ const Home = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       const response = await getPopularMovies(page);
+      console.log("API Response:", response.data);
+
       const movieData = response.data.results.map((movie) => ({
         title: movie.title,
         description: movie.overview,
@@ -20,13 +22,8 @@ const Home = () => {
           : "https://placehold.co/500x750?text=No+Image",
       }));
 
-      // Chèn console.log để kiểm tra dữ liệu API trả về
-      console.log("API Response:", response.data.results);
-      // Kiểm tra giá trị của imageUrl trước khi setMovies
-      console.log("Movie Data:", movieData);
-
       setMovies(movieData);
-      setTotalPages(response.total_pages);
+      setTotalPages(response.data.total_pages);
     };
 
     fetchMovies();
