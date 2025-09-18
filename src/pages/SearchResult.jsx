@@ -11,11 +11,18 @@ const SearchResult = () => {
     const fetchSearchResults = async () => {
       if (query) {
         const response = await searchMovies(query);
+        const movieData = response.data.results.map((movie) => ({
+          title: movie.title,
+          description: movie.overview,
+          imageUrl: movie.poster_path
+            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+            : "https://placehold.co/500x750?text=No+Image",
+        }));
 
         // Kiểm tra dữ liệu tìm kiếm
-        console.log("Search API Response:", response.data.results);
+        console.log("Search API Response:", response.data);
 
-        setMovies(response.data.results);
+        setMovies(movieData);
       }
     };
 

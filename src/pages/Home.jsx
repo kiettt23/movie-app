@@ -15,7 +15,9 @@ const Home = () => {
       const movieData = response.data.results.map((movie) => ({
         title: movie.title,
         description: movie.overview,
-        imageUrl: movie.poster_path, // Truyền poster_path vào imageUrl
+        imageUrl: movie.poster_path
+          ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+          : "https://placehold.co/500x750?text=No+Image",
       }));
 
       // Chèn console.log để kiểm tra dữ liệu API trả về
