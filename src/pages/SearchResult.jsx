@@ -11,6 +11,10 @@ const SearchResult = () => {
     const fetchSearchResults = async () => {
       if (query) {
         const response = await searchMovies(query);
+
+        // Kiểm tra dữ liệu tìm kiếm
+        console.log("Search API Response:", response.data.results);
+
         setMovies(response.data.results);
       }
     };
