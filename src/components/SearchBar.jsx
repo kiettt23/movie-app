@@ -8,7 +8,7 @@ const SearchBar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (query.trim()) {
-      navigate(`/search?q=${query}`);
+      navigate(`/search?query=${query}`);
     }
   };
 
