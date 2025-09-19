@@ -19,4 +19,7 @@ export const getPopularMovies = (page = 1) =>
 export const searchMovies = (query, page = 1) =>
   tmdb.get("/search/movie", { params: { query, page } });
 
+// Lấy chi tiết 1 phim theo id
+export const getMovieDetail = (id) => tmdb.get(`/movie/${id}`);
+
 export default tmdb;

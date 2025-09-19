@@ -15,6 +15,7 @@ const Home = () => {
       console.log("API Response:", response.data);
 
       const movieData = response.data.results.map((movie) => ({
+        id: movie.id,
         title: movie.title,
         description: movie.overview,
         imageUrl: movie.poster_path
