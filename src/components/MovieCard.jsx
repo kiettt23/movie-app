@@ -2,8 +2,6 @@ import { useNavigate } from "react-router-dom";
 
 const MovieCard = ({ id, title, description, imageUrl }) => {
   const navigate = useNavigate();
-  // Kiểm tra URL hình ảnh
-  console.log("Image URL:", imageUrl);
 
   return (
     <div

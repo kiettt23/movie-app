@@ -22,4 +22,11 @@ export const searchMovies = (query, page = 1) =>
 // Lấy chi tiết 1 phim theo id
 export const getMovieDetail = (id) => tmdb.get(`/movie/${id}`);
 
+// Lấy danh sách thể loại phim
+export const getGenres = () => tmdb.get("/genre/movie/list");
+
+// Lọc phim theo genre
+export const discoverMovies = (genreId, page = 1) =>
+  tmdb.get("/discover/movie", { params: { with_genres: genreId, page } });
+
 export default tmdb;
