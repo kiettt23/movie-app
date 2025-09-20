@@ -1,7 +1,20 @@
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { FavoritesContext } from "../context/FavoritesContext";
 
 const MovieCard = ({ id, title, description, imageUrl }) => {
   const navigate = useNavigate();
+  const { addFavorite, removeFavorite, isFavorite } =
+    useContext(FavoritesContext);
+
+  const handleToggleFavorite = (e) => {
+    e.stopPropagation(); // tránh click card => navigate
+    if (isFavorite(id)) {
+      removeFavorite(id);
+    } else {
+      addFavorite({ id, title, description, imageUrl });
+    }
+  };
 
   return (
     <div
@@ -18,7 +31,15 @@ const MovieCard = ({ id, title, description, imageUrl }) => {
       />
       <div className="px-6 py-4">
         <h2 className="text-xl font-bold">{title}</h2>
-        <p className="text-gray-700 text-base">{description}</p>
+        <p className="text-gray-700 text-base line-clamp-3">{description}</p>
+        <button
+          onClick={handleToggleFavorite}
+          className={`mt-2 px-3 py-1 rounded ${
+            isFavorite(id) ? "bg-red-500 text-white" : "bg-gray-200 text-black"
+          }`}
+        >
+          {isFavorite(id) ? "★ Remove Favorite" : "☆ Add Favorite"}
+        </button>
       </div>
     </div>
   );
