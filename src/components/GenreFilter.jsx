@@ -19,7 +19,7 @@ const GenreFilter = ({ onChange }) => {
   return (
     <select
       onChange={(e) => onChange(e.target.value)}
-      className="border rounded px-2 py-1"
+      className="border rounded px-2 py-1 w-full sm:w-auto"
     >
       <option value="">All Genres</option>
       {genres.map((g) => (

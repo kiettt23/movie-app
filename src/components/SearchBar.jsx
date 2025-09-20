@@ -13,12 +13,12 @@ const SearchBar = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex">
+    <form onSubmit={handleSubmit} className="flex w-full sm:w-auto">
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="px-4 py-2 border rounded-l"
+        className="flex-grow sm:w-64 px-4 py-2 border rounded-l"
         placeholder="Search for a movie..."
       />
       <button

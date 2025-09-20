@@ -48,12 +48,12 @@ export default function MovieDetail() {
         ← Back
       </button>
 
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-3 gap-6 lg:gap-10">
         {posterUrl ? (
           <img
             src={posterUrl}
             alt={movie.title}
-            className="w-full rounded-lg object-cover"
+            className="w-full h-64 sm:h-96 rounded-lg object-cover"
           />
         ) : (
           <div className="w-full h-64 bg-gray-300 flex items-center justify-center rounded-lg">
@@ -62,17 +62,19 @@ export default function MovieDetail() {
         )}
 
         <div className="md:col-span-2 flex flex-col gap-3">
-          <h1 className="text-3xl font-semibold">{movie.title}</h1>
-          <div className="text-sm text-gray-500">
+          <h1 className="text-3xl sm:text-4xl font-semibold">{movie.title}</h1>
+          <div className="text-sm sm:text-base text-gray-500">
             {movie.genres?.map((g) => g.name).join(" • ") || "No genre"}
           </div>
-          <div className="text-sm text-gray-500">
+          <div className="text-sm sm:text-base text-gray-500">
             Release: {movie.release_date || "N/A"}
           </div>
-          <div className="text-sm text-yellow-600">
+          <div className="text-sm sm:text-base text-yellow-600">
             ★ {movie.vote_average ? movie.vote_average.toFixed(1) : "—"}/10
           </div>
-          <p className="mt-2 text-base leading-relaxed">{movie.overview}</p>
+          <p className="mt-2 text-base sm:text-lg leading-relaxed">
+            {movie.overview}
+          </p>
         </div>
       </div>
     </section>

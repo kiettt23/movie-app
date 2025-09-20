@@ -18,7 +18,7 @@ const MovieCard = ({ id, title, description, imageUrl }) => {
 
   return (
     <div
-      className="max-w-sm rounded overflow-hidden shadow-lg bg-white cursor-pointer hover:shadow-xl transition"
+      className="rounded overflow-hidden shadow-lg bg-white cursor-pointer hover:shadow-xl transition h-full flex flex-col"
       onClick={() => navigate(`/movie/${id}`)}
     >
       <img
