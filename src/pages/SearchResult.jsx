@@ -14,19 +14,23 @@ const SearchResult = () => {
   useEffect(() => {
     const fetchSearchResults = async () => {
       if (query) {
-        const response = await searchMovies(query, page);
+        try {
+          const response = await searchMovies(query, page);
 
-        const movieData = response.data.results.map((movie) => ({
-          id: movie.id,
-          title: movie.title,
-          description: movie.overview,
-          imageUrl: movie.poster_path
-            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-            : "https://placehold.co/500x750?text=No+Image",
-        }));
+          const movieData = response.data.results.map((movie) => ({
+            id: movie.id,
+            title: movie.title,
+            description: movie.overview,
+            imageUrl: movie.poster_path
+              ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+              : "https://placehold.co/500x750?text=No+Image",
+          }));
 
-        setMovies(movieData);
-        setTotalPages(response.data.total_pages);
+          setMovies(movieData);
+          setTotalPages(response.data.total_pages);
+        } catch (err) {
+          console.error("Search failed:", err);
+        }
       }
     };
     fetchSearchResults();

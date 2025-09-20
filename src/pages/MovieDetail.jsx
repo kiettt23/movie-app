@@ -5,10 +5,10 @@ import { getMovieDetail } from "../services/tmdb";
 const IMG_BASE = "https://image.tmdb.org/t/p/";
 
 export default function MovieDetail() {
-  const { id } = useParams(); // lấy id từ URL /movie/:id
+  const { id } = useParams();
   const navigate = useNavigate();
 
-  const [movie, setMovie] = useState(null); // lưu dữ liệu chi tiết
+  const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -17,7 +17,6 @@ export default function MovieDetail() {
       try {
         setLoading(true);
         const res = await getMovieDetail(id);
-        
         setMovie(res.data);
       } catch (err) {
         console.error(err);
