@@ -17,7 +17,7 @@ export default function MovieDetail() {
       try {
         setLoading(true);
         const res = await getMovieDetail(id);
-        console.log("Movie Detail", res.data);
+        
         setMovie(res.data);
       } catch (err) {
         console.error(err);

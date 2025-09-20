@@ -22,11 +22,15 @@ const GenreFilter = ({ onChange }) => {
       className="border rounded px-2 py-1 w-full sm:w-auto"
     >
       <option value="">All Genres</option>
-      {genres.map((g) => (
-        <option key={g.id} value={g.id}>
-          {g.name}
-        </option>
-      ))}
+      {genres.length > 0 ? (
+        genres.map((g) => (
+          <option key={g.id} value={g.id}>
+            {g.name}
+          </option>
+        ))
+      ) : (
+        <option disabled>No genres available</option>
+      )}
     </select>
   );
 };

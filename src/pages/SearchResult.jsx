@@ -15,7 +15,7 @@ const SearchResult = () => {
     const fetchSearchResults = async () => {
       if (query) {
         const response = await searchMovies(query, page);
-        console.log("Search API Response", response.data);
+
         const movieData = response.data.results.map((movie) => ({
           id: movie.id,
           title: movie.title,
@@ -39,7 +39,11 @@ const SearchResult = () => {
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Search Results for "{query}"</h1>
-      <MovieList movies={movies} />
+      {movies.length > 0 ? (
+        <MovieList movies={movies} />
+      ) : (
+        <p className="mt-4 text-gray-500">No movies found.</p>
+      )}
       <Pagination
         currentPage={page}
         totalPages={totalPages}

@@ -17,7 +17,7 @@ const Home = () => {
         const response = genreId
           ? await discoverMovies(genreId, page)
           : await getPopularMovies(page);
-        console.log("API Response", response.data);
+
         const movieData = response.data.results.map((movie) => ({
           id: movie.id,
           title: movie.title,
@@ -47,7 +47,11 @@ const Home = () => {
       <h1 className="text-2xl font-bold mt-4">
         {genreId ? "Filtered Movies" : "Popular Movies"}
       </h1>
-      <MovieList movies={movies} />
+      {movies.length > 0 ? (
+        <MovieList movies={movies} />
+      ) : (
+        <p className="mt-4 text-gray-500">No movies found.</p>
+      )}
       <Pagination
         currentPage={page}
         totalPages={totalPages}

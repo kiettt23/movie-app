@@ -13,6 +13,10 @@ const App = () => {
         <Route path="favorites" element={<Favorites />} />
         <Route path="movie/:id" element={<MovieDetail />} />
         <Route path="search" element={<SearchResult />} />
+        <Route
+          path="*"
+          element={<h1 className="p-6 text-2xl">404 - Page Not Found</h1>}
+        />
       </Route>
     </Routes>
   );
