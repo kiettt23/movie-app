@@ -1,15 +1,30 @@
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { FavoritesContext } from "../context/FavoritesContext";
+
+const getButtonClassName = (isFavorite) => {
+  const baseClassName = "mt-2 px-3 py-1 rounded transition-colors duration-200";
+
+  return `${baseClassName}${
+    isFavorite
+      ? "bg-red-500 text-white hover:bg-red-600"
+      : "bg-gray-200 text-black hover:bg-gray-300"
+  }`;
+};
 
 const MovieCard = ({ id, title, description, imageUrl }) => {
   const navigate = useNavigate();
-  const { addFavorite, removeFavorite, isFavorite } =
-    useContext(FavoritesContext);
+  const {
+    addFavorite,
+    removeFavorite,
+    isFavorite: isFavoriteFn,
+  } = useContext(FavoritesContext);
+
+  const isFavorite = useMemo(() => isFavoriteFn(id), [id, isFavoriteFn]);
 
   const handleToggleFavorite = (e) => {
     e.stopPropagation(); // tránh click card => navigate
-    if (isFavorite(id)) {
+    if (isFavorite) {
       removeFavorite(id);
     } else {
       addFavorite({ id, title, description, imageUrl });
@@ -38,13 +53,9 @@ const MovieCard = ({ id, title, description, imageUrl }) => {
         <p className="text-gray-700 text-base line-clamp-3">{description}</p>
         <button
           onClick={handleToggleFavorite}
-          className={`mt-2 px-3 py-1 rounded transition-colors duration-200 ${
-            isFavorite(id)
-              ? "bg-red-500 text-white hover:bg-red-600"
-              : "bg-gray-200 text-black hover:bg-gray-300"
-          }`}
+          className={getButtonClassName(isFavorite)}
         >
-          {isFavorite(id) ? "★ Remove Favorite" : "☆ Add Favorite"}
+          {isFavorite ? "★ Remove Favorite" : "☆ Add Favorite"}
         </button>
       </div>
     </div>
